@@ -72,3 +72,6 @@ Plugins/*/Intermediate/*
 
 # Cache files for the editor to use
 DerivedDataCache/*
+
+# Just download Wukong assets from marketplace
+Content/ParagonSunWukong/*
