@@ -54,6 +54,9 @@ public:
 		virtual FAttackInfo GetCurrentAttackStep();
 
 	UFUNCTION(BlueprintCallable, Category = "Attack Combo")
+		virtual FAttackInfo GetLastAttackStep();
+
+	UFUNCTION(BlueprintCallable, Category = "Attack Combo")
 		virtual bool IsInCombo();
 
 	virtual bool TryAttack(FAttackInfo& AttackStepOutput);

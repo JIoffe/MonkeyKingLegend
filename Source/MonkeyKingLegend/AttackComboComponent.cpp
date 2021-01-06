@@ -97,3 +97,8 @@ int UAttackComboComponent::GetNumberOfStepsInCombo()
 {
 	return ComboAttacks.Num();
 }
+
+FAttackInfo UAttackComboComponent::GetLastAttackStep()
+{
+	return ComboAttacks[ComboAttacks.Num() - 1];
+}

@@ -162,15 +162,15 @@ void AMonkeyKingCharacter::Tick(float DeltaTime)
 			StaffSpecialReadyFX->SetActorHiddenInGame(CurrentPlayerState != EPlayerState::SpecialAttackReady);
 		}
 
-		//if (IsHoldingDash)
-		//{
-		//	DashHoldTimer += DeltaTime;
-		//	if (DashHoldTimer >= HoldTimeForSprint)
-		//	{
-		//		CurrentPlayerState = EPlayerState::Sprinting;
-		//		GetCharacterMovement()->MaxWalkSpeed = SprintMovementSpeed;
-		//	}
-		//}
+		if (IsHoldingDash)
+		{
+			DashHoldTimer += DeltaTime;
+			if (DashHoldTimer >= HoldTimeForSprint)
+			{
+				CurrentPlayerState = EPlayerState::Sprinting;
+				GetCharacterMovement()->MaxWalkSpeed = SprintMovementSpeed;
+			}
+		}
 		break;
 	}
 }
@@ -335,6 +335,15 @@ void AMonkeyKingCharacter::OnPrimaryAttack_Pressed()
 	if (!CanAttack()) 
 	{
 		return;
+	}
+
+	if (CurrentPlayerState == EPlayerState::Sprinting)
+	{
+		//Attack with the last step in the primary combo
+		CurrentAttackInfo = PrimaryAttackCombo->GetLastAttackStep();
+		CurrentAttackState = EAttackState::Primary;
+		PlayAnimMontage(CurrentAttackInfo.AnimMontage);
+		CurrentPlayerState = EPlayerState::PrimaryAttackCombo;
 	}
 
 	if (GetMovementComponent()->IsFalling())
